@@ -1,10 +1,13 @@
 "use strict";
 
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import * as vscode from 'vscode';
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { window, ViewColumn, Uri } from "vscode";
 
 class Navigator {
-  constructor(options, reportProvider) {
+  navigate: any;
+  constructor(options: any, reportProvider: any) {
     function getTargetColumn() {
       const numOpenEditors = window.visibleTextEditors.length;
 
@@ -22,7 +25,7 @@ class Navigator {
       }
     }
 
-    function navigate(path) {
+    function navigate(path: any) {
       const panel = vscode.window.createWebviewPanel(
         "complexity-analysis", // Identifies the type of the webview. Used internally
         "Complexity Analysis Coding", // Title of the panel displayed to the user

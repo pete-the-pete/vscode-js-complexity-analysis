@@ -5,9 +5,14 @@
   "version": "2.0.0",
   "publisher": "TomiTurtiainen",
   "engines": {
-    "vscode": "^1.5.1"
+    "vscode": "^1.52.0"
+  },
+  "lint-staged": {
+    "*.ts": "eslint --fix"
   },
   "scripts": {
+    "compile": "tsc -b",
+    "watch": "tsc -b -w",
     "lint": "eslint --ext .js ./src"
   },
   "categories": [
@@ -62,7 +67,10 @@
     "theme": "light"
   },
   "devDependencies": {
-    "eslint": "^8.16.0"
+    "@types/lodash": "^4.14.182",
+    "eslint": "^8.16.0",
+    "ts-migrate": "^0.1.28",
+    "typescript": "^4.7.3"
   },
   "dependencies": {
     "dot": "1.1.3",

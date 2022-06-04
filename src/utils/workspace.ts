@@ -1,6 +1,7 @@
 "use strict";
 
 import config from "../config";
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace } from "vscode";
 
 /**
@@ -11,19 +12,22 @@ import { workspace } from "vscode";
  */
 function getWorkspaceFiles() {
     return config.getIncludeExclude()
-        .then(({ include, exclude }) => {
+        .then(({
+        include,
+        exclude
+    }: any) => {
             const includePattern = _createGlob(include);
             const excludePattern = _createGlob(exclude);
 
             return workspace.findFiles(includePattern, excludePattern);
         })
-        .then(files => files.map(fileUri => ({
-            fsPath: fileUri.fsPath,
-            relativePath: workspace.asRelativePath(fileUri)
-        })));
+        .then((files: any) => files.map((fileUri: any) => ({
+        fsPath: fileUri.fsPath,
+        relativePath: workspace.asRelativePath(fileUri)
+    })));
 }
 
-function _createGlob(patterns) {
+function _createGlob(patterns: any) {
   switch (patterns.length) {
     case 0:
       return "";

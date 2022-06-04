@@ -1,5 +1,6 @@
 "use strict";
 
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { commands, workspace } from "vscode";
 
 import config from "./config";
@@ -12,11 +13,14 @@ import AnalyseProjectCommand from "./commands/analyse-project";
 const AnalyseFileCmdName    = "complexityAnalysis.analyseFile";
 const AnalyseProjectCmdName = "complexityAnalysis.analyseProject";
 
-function Controller(context) {
+function Controller(this: any, context: any) {
     const reportFactory     = new ReportFactory();
+    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const reportProvider    = new HtmlReportProvider(reportFactory, config.options.navigation);
     const navigator         = new Navigator(config.options.navigation, reportProvider);
+    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const cmdAnalyseFile    = new AnalyseFileCommand(reportFactory, navigator);
+    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const cmdAnalyseProject = new AnalyseProjectCommand(reportFactory, navigator);
 
     function activate() {

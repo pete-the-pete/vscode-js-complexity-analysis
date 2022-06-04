@@ -23,11 +23,11 @@ const overviewMetrics = {
     }
 };
 
-function getErrors(errors) {
+function getErrors(errors: any) {
     return errors.join("<br/>");
 }
 
-function buildProjectSummary(htmlBuilder, analysis, errors) {
+function buildProjectSummary(htmlBuilder: any, analysis: any, errors: any) {
     const metrics = [
         { metric: overviewMetrics.maintainability, value: analysis.avgMaintainability },
         { metric: overviewMetrics.loc,             value: analysis.totalSloc }
@@ -46,7 +46,7 @@ function buildProjectSummary(htmlBuilder, analysis, errors) {
     }
 }
 
-function ProjectReport(analysis, errors) {
+function ProjectReport(this: any, analysis: any, errors: any) {
     function toHtml() {
         const htmlBuilder = new HtmlBuilder();
 

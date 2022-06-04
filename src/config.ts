@@ -1,7 +1,10 @@
 "use strict";
 
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'fs' or its corresponding type ... Remove this comment to see the full error message
 import { readFileAsync } from "fs";
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'path' or its corresponding typ... Remove this comment to see the full error message
 import { join } from "path";
+// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace as _workspace } from "vscode";
 import { isEmpty } from "lodash";
 const workspace = _workspace;
@@ -27,7 +30,7 @@ function getIncludeExclude() {
     }
 
     return _getJsConfigConfig(workspace.rootPath)
-        .then(jsconfig => {
+        .then((jsconfig: any) => {
             if (jsconfig) {
                 return jsconfig;
             }
@@ -39,7 +42,7 @@ function getIncludeExclude() {
         });
 }
 
-function _getWorkspaceConfig(extensionConfig) {
+function _getWorkspaceConfig(extensionConfig: any) {
     const hasConfig = extensionConfig.has("include") || extensionConfig.has("exclude");
 
     if (!hasConfig) {
@@ -63,11 +66,11 @@ function _getWorkspaceConfig(extensionConfig) {
     };
 }
 
-function _getJsConfigConfig(rootPath) {
+function _getJsConfigConfig(rootPath: any) {
     const jsconfigFilename = join(rootPath, "jsconfig.json");
 
     return readFileAsync(jsconfigFilename, "utf8")
-        .then(fileContents => {
+        .then((fileContents: any) => {
             const jsconfig = JSON.parse(fileContents);
             if (!jsconfig.include && !jsconfig.exclude) {
                 return null;

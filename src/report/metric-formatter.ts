@@ -3,7 +3,7 @@
 import { round } from "lodash";
 import { error_small, warning_small } from "./icons.js";
 
-function formatMetric(value, warningThreshold, errorThreshold) {
+function formatMetric(value: any, warningThreshold: any, errorThreshold: any) {
     const rounded = round(value, 1);
 
     if (value > errorThreshold) {

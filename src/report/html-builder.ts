@@ -1,21 +1,24 @@
 "use strict";
 
-function getStyleDefinition(css) {
+function getStyleDefinition(css: any) {
     return css ? `<style>${ css }</style>` : "";
 }
 
 class HtmlBuilder {
+    appendBody: any;
+    appendStyle: any;
+    toHtml: any;
     constructor() {
         let styles = "";
         let body = "";
 
-        function appendStyle(css) {
+        function appendStyle(this: any, css: any) {
             styles += css;
 
             return this;
         }
 
-        function appendBody(html) {
+        function appendBody(this: any, html: any) {
             body += html;
 
             return this;

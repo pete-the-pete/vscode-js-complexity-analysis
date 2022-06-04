@@ -1,6 +1,6 @@
 "use strict";
 
-function header(title) {
+function header(title: any) {
     return `<h1>${ title }</h1>`;
 }
 
