@@ -6,7 +6,6 @@ import { readFileAsync } from "fs";
 import { join } from "path";
 // @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace as _workspace } from "vscode";
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { isEmpty } from "lodash";
 const workspace = _workspace;
 
