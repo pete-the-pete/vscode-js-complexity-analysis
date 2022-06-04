@@ -5,9 +5,16 @@ import Analyzer from "../complexity-analyzer";
 import FileAnalysis from "../models/file-analysis.js";
 import FileReport from "../report/file-report.js";
 
-function AnalyseFile(this: any, reportFactory: any, navigator: any) {
+export default class AnalyseFile {
+    reportFactory: any;
+    navigator: any;
 
-    function buildReport(document: any) {
+    constructor(reportFactory: any, navigator: any) {
+      this.reportFactory = reportFactory;
+      this.navigator = navigator;
+    }
+
+    buildReport(document: any) {
         const filePath = workspace.asRelativePath(document.fileName);
 
         const fileContents = document.getText();
@@ -17,21 +24,17 @@ function AnalyseFile(this: any, reportFactory: any, navigator: any) {
 
         // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         const report = new FileReport(analysis, false);
-        reportFactory.addReport(filePath, report);
+        this.reportFactory.addReport(filePath, report);
 
-        navigator.navigate(`/${ filePath }`);
+        this.navigator.navigate(`/${ filePath }`);
     }
 
-    function runAnalysis(editor: any) {
+    runAnalysis(editor: any) {
         try {
-            buildReport(editor.document);
+            this.buildReport(editor.document);
         } catch (e) {
             console.log(e);
             window.showErrorMessage("Failed to analyse file. " + e);
         }
     }
-
-    this.execute = runAnalysis;
 }
-
-export default AnalyseFile;
