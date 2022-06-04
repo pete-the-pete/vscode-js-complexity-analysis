@@ -1,11 +1,12 @@
 "use strict";
 
+// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'loda... Remove this comment to see the full error message
 import { max as _max, flatMap } from "lodash";
 
 /**
  * Analysis data for single file
  */
-function FileAnalysis(path, analysis) {
+function FileAnalysis(this: any, path: any, analysis: any) {
     this.path = path;
 
     this.dependencies = analysis.dependencies;
@@ -14,9 +15,9 @@ function FileAnalysis(path, analysis) {
     this.maintainability = Math.max(0, analysis.maintainability * 100 / 171);
     this.sloc            = analysis.aggregate.sloc.logical;
 
-    const functionsMax = _max(analysis.methods.map(m => m.cyclomatic)) || 0;
+    const functionsMax = _max(analysis.methods.map((m: any) => m.cyclomatic)) || 0;
     const classMethodsMax = _max(
-        flatMap(analysis.classes.map(c => c.methods.map(m => m.cyclomatic)))
+        flatMap(analysis.classes.map((c: any) => c.methods.map((m: any) => m.cyclomatic)))
     ) || 0;
     this.cyclomatic      = {
         avg: analysis.methodAverage.cyclomatic,
@@ -25,7 +26,7 @@ function FileAnalysis(path, analysis) {
     this.difficulty = analysis.aggregate.halstead.difficulty
     this.bugs       = analysis.aggregate.halstead.bugs;
 
-    this.functions = analysis.methods.map(f => ({
+    this.functions = analysis.methods.map((f: any) => ({
         name:       f.name,
         line:       f.lineStart,
         params:     f.paramCount,
@@ -35,13 +36,14 @@ function FileAnalysis(path, analysis) {
         bugs:       f.halstead.bugs
     }));
 
-    this.classes = analysis.classes.map(c => ({
+    this.classes = analysis.classes.map((c: any) => ({
         name:       c.name,
         line:       c.lineStart,
         sloc:       c.aggregate.sloc.logical,
         difficulty: c.aggregate.halstead.difficulty,
         bugs:       c.aggregate.halstead.bugs,
-        methods:    c.methods.map(method => ({
+
+        methods:    c.methods.map((method: any) => ({
             name:       method.name,
             line:       method.lineStart,
             params:     method.paramCount,
