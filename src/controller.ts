@@ -17,7 +17,6 @@ function Controller(this: any, context: any) {
     const reportProvider    = new HtmlReportProvider(reportFactory, config.options.navigation);
     const navigator         = new Navigator(config.options.navigation, reportProvider);
     const cmdAnalyseFile    = new AnalyseFileCommand(reportFactory, navigator);
-    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const cmdAnalyseProject = new AnalyseProjectCommand(reportFactory, navigator);
 
     function activate() {
@@ -27,7 +26,7 @@ function Controller(this: any, context: any) {
 
         context.subscriptions.push(
             commands.registerCommand(
-                AnalyseProjectCmdName, cmdAnalyseProject.execute));
+                AnalyseProjectCmdName, () => cmdAnalyseProject.runAnalysis()));
 
         context.subscriptions.push(
             workspace.registerTextDocumentContentProvider(
