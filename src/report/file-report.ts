@@ -5,6 +5,7 @@ import metricRow from "./metric-row";
 import reportStyle from "./report-style";
 import header from "./header";
 import functionsTable from "./functions-table";
+// @ts-expect-error ts-migrate(2614) FIXME: Module '"./link"' has no exported member 'localLin... Remove this comment to see the full error message
 import { localLink as link } from "./link";
 
 const overviewMetrics = {
@@ -44,7 +45,7 @@ function backLink() {
     return `${ link("", "&#9664; back") }`;
 }
 
-function buildFileSummary(htmlBuilder, analysis, includeBackLink) {
+function buildFileSummary(htmlBuilder: any, analysis: any, includeBackLink: any) {
     const metrics = [
         { metric: overviewMetrics.maintainability, value: analysis.maintainability },
         { metric: overviewMetrics.loc,             value: analysis.sloc },
@@ -62,7 +63,7 @@ function buildFileSummary(htmlBuilder, analysis, includeBackLink) {
             .appendBody(functionsTable(analysis.path, analysis.functions));
     }
 
-    analysis.classes.forEach(classAnalysis => {
+    analysis.classes.forEach((classAnalysis: any) => {
         htmlBuilder
             .appendBody(header(`class ${ classAnalysis.name }`))
             .appendBody(functionsTable(analysis.path, classAnalysis.methods))
@@ -74,7 +75,7 @@ function buildFileSummary(htmlBuilder, analysis, includeBackLink) {
     }
 }
 
-function FileReport(analysis, includeBackLink = true) {
+function FileReport(this: any, analysis: any, includeBackLink = true) {
     function toHtml() {
         const htmlBuilder = new HtmlBuilder();
 

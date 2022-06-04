@@ -1,7 +1,9 @@
 "use strict";
 
 import Table from "./table";
+// @ts-expect-error ts-migrate(2614) FIXME: Module '"./metric-formatter.js"' has no exported m... Remove this comment to see the full error message
 import { formatMetric } from "./metric-formatter.js";
+// @ts-expect-error ts-migrate(2614) FIXME: Module '"./link.js"' has no exported member 'fileL... Remove this comment to see the full error message
 import { fileLineLink as link } from "./link.js";
 
 const columns = [
@@ -13,7 +15,7 @@ const columns = [
     { title: "Est # bugs", align: "right" }
 ];
 
-function formatName(filePath, name, line) {
+function formatName(filePath: any, name: any, line: any) {
     const encodedName = name
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -24,11 +26,11 @@ function formatName(filePath, name, line) {
     return link(encodedName, filePath, line);
 }
 
-function ClassesTable(analysis) {
+function ClassesTable(analysis: any) {
     const filePath = analysis.path;
 
-    const classes = analysis.classes.map(c => {
-        const rows = c.methods.map(f => [
+    const classes = analysis.classes.map((c: any) => {
+        const rows = c.methods.map((f: any) => [
             formatName(filePath, f.name, f.line),
             f.sloc,
             f.params,

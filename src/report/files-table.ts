@@ -1,7 +1,9 @@
 "use strict";
 
 import Table from "./table";
+// @ts-expect-error ts-migrate(2614) FIXME: Module '"./metric-formatter"' has no exported memb... Remove this comment to see the full error message
 import { formatMetric } from "./metric-formatter";
+// @ts-expect-error ts-migrate(2614) FIXME: Module '"./link"' has no exported member 'localLin... Remove this comment to see the full error message
 import { localLink as link } from "./link";
 
 const columns = [
@@ -12,12 +14,12 @@ const columns = [
     { title: "Est errors",         align: "right" }
 ];
 
-function formatFile(filePath) {
+function formatFile(filePath: any) {
     return link(filePath, filePath);
 }
 
-function FilesTable(analysis) {
-    const rows = analysis.fileAnalyses.map(f => [
+function FilesTable(analysis: any) {
+    const rows = analysis.fileAnalyses.map((f: any) => [
         formatFile(f.path),
         f.sloc,
         formatMetric(f.cyclomatic.avg, 6, 10),
