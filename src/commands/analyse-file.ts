@@ -1,6 +1,5 @@
 "use strict";
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace, window } from "vscode";
 import Analyzer from "../complexity-analyzer";
 import FileAnalysis from "../models/file-analysis.js";
@@ -27,7 +26,6 @@ function AnalyseFile(this: any, reportFactory: any, navigator: any) {
         try {
             buildReport(editor.document);
         } catch (e) {
-            // @ts-expect-error ts-migrate(2584) FIXME: Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
             console.log(e);
             window.showErrorMessage("Failed to analyse file. " + e);
         }

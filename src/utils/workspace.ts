@@ -1,7 +1,6 @@
 "use strict";
 
 import config from "../config";
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace } from "vscode";
 
 /**

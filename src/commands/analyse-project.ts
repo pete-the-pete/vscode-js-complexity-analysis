@@ -2,7 +2,6 @@
 
 // @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'fs' or its corresponding type ... Remove this comment to see the full error message
 import { readFileAsync } from "fs";
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { window } from "vscode";
 // @ts-expect-error ts-migrate(2614) FIXME: Module '"../complexity-analyzer"' has no exported ... Remove this comment to see the full error message
 import { analyse } from "../complexity-analyzer";
@@ -52,7 +51,6 @@ function AnalyseProject(this: any, reportFactory: any, navigator: any) {
                     return analysis;
                 } catch (e) {
                     const errorMsg = `File ${ relativePath } analysis failed: ${ e }`;
-                    // @ts-expect-error ts-migrate(2584) FIXME: Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
                     console.error(errorMsg);
                     return errorMsg;
                 }
@@ -83,7 +81,6 @@ function AnalyseProject(this: any, reportFactory: any, navigator: any) {
 
     function handleError(error: any) {
         window.showErrorMessage("Failed to analyse file. " + error);
-        // @ts-expect-error ts-migrate(2584) FIXME: Cannot find name 'console'. Do you need to change ... Remove this comment to see the full error message
         console.log(error);
     }
 
