@@ -1,7 +1,7 @@
 "use strict";
 
 import { workspace, window } from "vscode";
-import Analyzer from "../complexity-analyzer";
+import { analyse } from "../complexity-analyzer";
 import FileAnalysis from "../models/file-analysis.js";
 import FileReport from "../report/file-report.js";
 
@@ -18,7 +18,7 @@ export default class AnalyseFile {
         const filePath = workspace.asRelativePath(document.fileName);
 
         const fileContents = document.getText();
-        const rawAnalysis = Analyzer.analyse(fileContents);
+        const rawAnalysis = analyse(fileContents);
         const analysis = new FileAnalysis(filePath, rawAnalysis);
 
         const report = new FileReport(analysis, false);

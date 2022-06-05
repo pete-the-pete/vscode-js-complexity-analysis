@@ -1,6 +1,5 @@
 "use strict";
 
-// @ts-expect-error ts-migrate(7016) FIXME: Could not find a declaration file for module 'dot'... Remove this comment to see the full error message
 import { template } from "dot";
 
 const tableTemplate = template(`

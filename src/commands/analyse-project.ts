@@ -2,9 +2,7 @@
 
 import { readFile } from "fs/promises";
 import { window } from "vscode";
-// @ts-expect-error ts-migrate(2614) FIXME: Module '"../complexity-analyzer"' has no exported ... Remove this comment to see the full error message
 import { analyse } from "../complexity-analyzer";
-// @ts-expect-error ts-migrate(2614) FIXME: Module '"../utils/workspace"' has no exported memb... Remove this comment to see the full error message
 import { getWorkspaceFiles } from "../utils/workspace";
 
 import FileAnalysis from "../models/file-analysis.js";
