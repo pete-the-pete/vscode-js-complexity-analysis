@@ -44,10 +44,8 @@ export default class AnalyseProject {
     return readFile(fsPath, "utf8").then((fileContents: any) => {
       try {
         const rawAnalysis = analyse(fileContents);
-        // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         const analysis = new FileAnalysis(relativePath, rawAnalysis);
 
-        // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
         const report = new FileReport(analysis);
         this.reportFactory.addReport(relativePath, report);
 
@@ -61,7 +59,6 @@ export default class AnalyseProject {
   }
 
   createAggregateReport(analyses: any) {
-    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const projectAnalysis = new ProjectAnalysis();
     const errors: any = [];
 
@@ -75,7 +72,6 @@ export default class AnalyseProject {
 
     const aggregate = projectAnalysis.getSummary();
 
-    // @ts-expect-error ts-migrate(7009) FIXME: 'new' expression, whose target lacks a construct s... Remove this comment to see the full error message
     const report = new ProjectReport(aggregate, errors);
     this.reportFactory.addReport("/", report);
 

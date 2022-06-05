@@ -9,35 +9,57 @@ import HtmlReportProvider from "./html-report-provider";
 import AnalyseFileCommand from "./commands/analyse-file";
 import AnalyseProjectCommand from "./commands/analyse-project";
 
-const AnalyseFileCmdName    = "complexityAnalysis.analyseFile";
+const AnalyseFileCmdName = "complexityAnalysis.analyseFile";
 const AnalyseProjectCmdName = "complexityAnalysis.analyseProject";
 
-function Controller(this: any, context: any) {
-    const reportFactory     = new ReportFactory();
-    const reportProvider    = new HtmlReportProvider(reportFactory, config.options.navigation);
-    const navigator         = new Navigator(config.options.navigation, reportProvider);
-    const cmdAnalyseFile    = new AnalyseFileCommand(reportFactory, navigator);
-    const cmdAnalyseProject = new AnalyseProjectCommand(reportFactory, navigator);
+export default class Controller {
+  context: any;
+  reportFactory: ReportFactory;
+  reportProvider: HtmlReportProvider;
+  navigator: Navigator;
+  cmdAnalyseFile: AnalyseFileCommand;
+  cmdAnalyseProject: AnalyseProjectCommand;
 
-    function activate() {
-        context.subscriptions.push(
-            commands.registerTextEditorCommand(
-                AnalyseFileCmdName, (editor) => cmdAnalyseFile.runAnalysis(editor)));
+  constructor(context: any) {
+    this.context = context;
 
-        context.subscriptions.push(
-            commands.registerCommand(
-                AnalyseProjectCmdName, () => cmdAnalyseProject.runAnalysis()));
+    this.reportFactory = new ReportFactory();
+    this.reportProvider = new HtmlReportProvider(
+      this.reportFactory,
+      config.options.navigation
+    );
+    this.navigator = new Navigator(
+      config.options.navigation,
+      this.reportProvider
+    );
+    this.cmdAnalyseFile = new AnalyseFileCommand(
+      this.reportFactory,
+      this.navigator
+    );
+    this.cmdAnalyseProject = new AnalyseProjectCommand(
+      this.reportFactory,
+      this.navigator
+    );
+  }
 
-        context.subscriptions.push(
-            workspace.registerTextDocumentContentProvider(
-                config.options.navigation.scheme, reportProvider));
-    }
+  activate() {
+    this.context.subscriptions.push(
+      commands.registerTextEditorCommand(AnalyseFileCmdName, (editor) =>
+        this.cmdAnalyseFile.runAnalysis(editor)
+      )
+    );
 
-    function dispose() {
-    }
+    this.context.subscriptions.push(
+      commands.registerCommand(AnalyseProjectCmdName, () =>
+        this.cmdAnalyseProject.runAnalysis()
+      )
+    );
 
-    this.activate = activate;
-    this.dispose = dispose;
+    this.context.subscriptions.push(
+      workspace.registerTextDocumentContentProvider(
+        config.options.navigation.scheme,
+        this.reportProvider
+      )
+    );
+  }
 }
-
-export default Controller;
