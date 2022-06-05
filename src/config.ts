@@ -1,10 +1,7 @@
 "use strict";
 
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'fs' or its corresponding type ... Remove this comment to see the full error message
-import { readFileAsync } from "fs";
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'path' or its corresponding typ... Remove this comment to see the full error message
+import { readFile } from "fs/promises";
 import { join } from "path";
-// @ts-expect-error ts-migrate(2307) FIXME: Cannot find module 'vscode' or its corresponding t... Remove this comment to see the full error message
 import { workspace as _workspace } from "vscode";
 import { isEmpty } from "lodash";
 const workspace = _workspace;
@@ -69,7 +66,7 @@ function _getWorkspaceConfig(extensionConfig: any) {
 function _getJsConfigConfig(rootPath: any) {
     const jsconfigFilename = join(rootPath, "jsconfig.json");
 
-    return readFileAsync(jsconfigFilename, "utf8")
+    return readFile(jsconfigFilename, "utf8")
         .then((fileContents: any) => {
             const jsconfig = JSON.parse(fileContents);
             if (!jsconfig.include && !jsconfig.exclude) {
