@@ -13,31 +13,31 @@ const template = _template(`
 `);
 
 function getTitle(metric: any) {
-    const url         = metric.infoUrl;
-    const title       = metric.title;
-    const description = metric.description || "";
+  const url = metric.infoUrl;
+  const title = metric.title;
+  const description = metric.description || "";
 
-    return url ?
-        `<a href="${ url }" target="_blank" title="${ description }">${ title }</a>` :
-        `<span title="${ description }">${ title }</span>`;
+  return url
+    ? `<a href="${url}" target="_blank" title="${description}">${title}</a>`
+    : `<span title="${description}">${title}</span>`;
 }
 
 function isInRange(range: any, value: any) {
-    if (Array.isArray(range)) {
-        return range[0] <= value && value < range[1];
-    } else {
-        return false;
-    }
+  if (Array.isArray(range)) {
+    return range[0] <= value && value < range[1];
+  } else {
+    return false;
+  }
 }
 
 function getIcon(metric: any, value: any) {
-    if (isInRange(metric.errorRange, value)) {
-        return error;
-    } else if (isInRange(metric.warningRange, value)) {
-        return warning
-    } else {
-        return "";
-    }
+  if (isInRange(metric.errorRange, value)) {
+    return error;
+  } else if (isInRange(metric.warningRange, value)) {
+    return warning;
+  } else {
+    return "";
+  }
 }
 
 /**
@@ -51,14 +51,14 @@ function getIcon(metric: any, value: any) {
  * - value: Value of the metric
  */
 function MetricBox(options: any) {
-    const metric = options.metric;
-    const value  = options.value;
+  const metric = options.metric;
+  const value = options.value;
 
-    return template({
-        icon:  getIcon(metric, value),
-        value: round(value, 1),
-        title: getTitle(metric)
-    });
+  return template({
+    icon: getIcon(metric, value),
+    value: round(value, 1),
+    title: getTitle(metric),
+  });
 }
 
 export default MetricBox;

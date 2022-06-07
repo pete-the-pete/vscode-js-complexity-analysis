@@ -1,30 +1,19 @@
 "use strict";
 
-class ReportFactory {
-    addReport: any;
-    clear: any;
-    getReport: any;
-    constructor() {
-        // Key: report uri as string
-        // Value: FileReport
-        const reports = new Map();
+export default class ReportFactory {
+  // Key: report uri as string
+  // Value: FileReport
+  reports: Map<any, any> = new Map();
 
-        function addReport(path: any, report: any) {
-            reports.set(path, report);
-        }
+  addReport(path: any, report: any) {
+    this.reports.set(path, report);
+  }
 
-        function getReport(uri: any) {
-            return reports.get(uri);
-        }
+  getReport(uri: any) {
+    return this.reports.get(uri);
+  }
 
-        function clear() {
-            reports.clear();
-        }
-
-        this.addReport = addReport;
-        this.getReport = getReport;
-        this.clear = clear;
-    }
+  clear() {
+    this.reports.clear();
+  }
 }
-
-export default ReportFactory;

@@ -5,47 +5,47 @@ import { formatMetric } from "./metric-formatter.js";
 import { fileLineLink as link } from "./link.js";
 
 const columns = [
-    { title: "Function",   align: "left"  },
-    { title: "SLOC",       align: "right" },
-    { title: "# params",   align: "right" },
-    { title: "Complexity", align: "right" },
-    { title: "Difficulty", align: "right" },
-    { title: "Est # bugs", align: "right" }
+  { title: "Function", align: "left" },
+  { title: "SLOC", align: "right" },
+  { title: "# params", align: "right" },
+  { title: "Complexity", align: "right" },
+  { title: "Difficulty", align: "right" },
+  { title: "Est # bugs", align: "right" },
 ];
 
 function formatName(filePath: any, name: any, line: any) {
-    const encodedName = name
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+  const encodedName = name
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
 
-    return link(encodedName, filePath, line);
+  return link(encodedName, filePath, line);
 }
 
 function ClassesTable(analysis: any) {
-    const filePath = analysis.path;
+  const filePath = analysis.path;
 
-    const classes = analysis.classes.map((c: any) => {
-        const rows = c.methods.map((f: any) => [
-            formatName(filePath, f.name, f.line),
-            f.sloc,
-            f.params,
-            formatMetric(f.cyclomatic, 6, 10),
-            formatMetric(f.difficulty),
-            formatMetric(f.bugs)
-        ]);
+  const classes = analysis.classes.map((c: any) => {
+    const rows = c.methods.map((f: any) => [
+      formatName(filePath, f.name, f.line),
+      f.sloc,
+      f.params,
+      formatMetric(f.cyclomatic, 6, 10),
+      formatMetric(f.difficulty),
+      formatMetric(f.bugs),
+    ]);
 
-        const functionsTable = new Table({
-            columns: columns,
-            rows: rows
-        });
-
-        return c.name + "<br/><br/>" + functionsTable.toHtml();
+    const functionsTable = new Table({
+      columns: columns,
+      rows: rows,
     });
 
-    return classes.join("<br/><br/>");
+    return c.name + "<br/><br/>" + functionsTable.toHtml();
+  });
+
+  return classes.join("<br/><br/>");
 }
 
 export default ClassesTable;

@@ -1,43 +1,46 @@
 "use strict";
 
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 import { window, ViewColumn, Uri } from "vscode";
 
-class Navigator {
-  navigate: any;
+export default class Navigator {
+  options: any;
+  reportProvider: any;
+
   constructor(options: any, reportProvider: any) {
-    function getTargetColumn() {
-      const numOpenEditors = window.visibleTextEditors.length;
+    this.options = options;
+    this.reportProvider = reportProvider;
+  }
 
-      switch (numOpenEditors) {
-        case 0:
-          return ViewColumn.One;
-        case 1:
-          return ViewColumn.Two;
-        case 2:
-          return ViewColumn.Three;
-        case 3:
-          return ViewColumn.Three;
-        default:
-          return ViewColumn.One;
-      }
+  getTargetColumn() {
+    const numOpenEditors = window.visibleTextEditors.length;
+
+    switch (numOpenEditors) {
+      case 0:
+        return ViewColumn.One;
+      case 1:
+        return ViewColumn.Two;
+      case 2:
+        return ViewColumn.Three;
+      case 3:
+        return ViewColumn.Three;
+      default:
+        return ViewColumn.One;
     }
+  }
 
-    function navigate(path: any) {
-      const panel = vscode.window.createWebviewPanel(
-        "complexity-analysis", // Identifies the type of the webview. Used internally
-        "Complexity Analysis Coding", // Title of the panel displayed to the user
-        getTargetColumn(), // Editor column to show the new webview panel in.
-        {} // Webview options. More on these later.
-      );
+  navigate(path: any) {
+    const panel = vscode.window.createWebviewPanel(
+      "complexity-analysis", // Identifies the type of the webview. Used internally
+      "Complexity Analysis Coding", // Title of the panel displayed to the user
+      this.getTargetColumn(), // Editor column to show the new webview panel in.
+      {} // Webview options. More on these later.
+    );
 
-      const uri = Uri.parse(`${options.scheme}://${options.authority}${path}`);
-        reportProvider.update(uri);
-        panel.webview.html = reportProvider.provideTextDocumentContent(uri);
-    }
-
-    this.navigate = navigate;
+    const uri = Uri.parse(
+      `${this.options.scheme}://${this.options.authority}${path}`
+    );
+    this.reportProvider.update(uri);
+    panel.webview.html = this.reportProvider.provideTextDocumentContent(uri);
   }
 }
-
-export default Navigator;

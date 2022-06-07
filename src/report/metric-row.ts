@@ -8,11 +8,11 @@ const template = _template(`
 `);
 
 function MetricRow(metrics: any) {
-    const renderedMetrics = metrics.map((m: any) => metricBox(m)).join("");
+  const renderedMetrics = metrics.map((m: any) => metricBox(m)).join("");
 
-    return template({
-        metrics: renderedMetrics
-    });
+  return template({
+    metrics: renderedMetrics,
+  });
 }
 
 export default MetricRow;

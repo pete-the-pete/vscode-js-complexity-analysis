@@ -1,44 +1,34 @@
 "use strict";
 
 function getStyleDefinition(css: any) {
-    return css ? `<style>${ css }</style>` : "";
+  return css ? `<style>${css}</style>` : "";
 }
 
-class HtmlBuilder {
-    appendBody: any;
-    appendStyle: any;
-    toHtml: any;
-    constructor() {
-        let styles = "";
-        let body = "";
+export default class HtmlBuilder {
+  styles: string = "";
+  body: string = "";
 
-        function appendStyle(this: any, css: any) {
-            styles += css;
+  appendStyle(css: string) {
+    this.styles += css;
 
-            return this;
-        }
+    return this;
+  }
 
-        function appendBody(this: any, html: any) {
-            body += html;
+  appendBody(html: string) {
+    this.body += html;
 
-            return this;
-        }
+    return this;
+  }
 
-        function toHtml() {
-            return `<html>
-    <head>
-        ${getStyleDefinition(styles)}
-    </head>
-    <body>
-        ${body}
-    </body>
-</html>`;
-        }
-
-        this.appendStyle = appendStyle;
-        this.appendBody = appendBody;
-        this.toHtml = toHtml;
-    }
+  toHtml() {
+    return `
+    <html>
+      <head>
+          ${getStyleDefinition(this.styles)}
+      </head>
+      <body>
+          ${this.body}
+      </body>
+    </html>`;
+  }
 }
-
-export default HtmlBuilder;

@@ -1,5 +1,19 @@
 "use strict";
 
+export interface ProjectSummary {
+  totalSloc: number;
+  avgSloc: number;
+  avgMaintainability: number;
+  avgCyclomatic: number;
+  fileAnalyses: any[];
+}
+
+export interface MetricsAverage {
+  sloc: number;
+  cyclomatic: number;
+  maintainability: number;
+};
+
 export default class ProjectAnalysis {
   analyses: any = [];
 
@@ -12,8 +26,13 @@ export default class ProjectAnalysis {
   }
 
   calculateAverages(analyses: any) {
-    const result = {};
-    const sum = {
+    const result: MetricsAverage = {
+      sloc: 0,
+      cyclomatic: 0,
+      maintainability: 0,
+    };
+
+    const sum: MetricsAverage = {
       sloc: 0,
       cyclomatic: 0,
       maintainability: 0,
@@ -23,31 +42,26 @@ export default class ProjectAnalysis {
 
     analyses.forEach((analysis: any) => {
       metrics.forEach((metric) => {
-        // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-        sum[metric] += analysis[metric];
+        sum[metric as keyof MetricsAverage] += analysis[metric];
       });
     });
 
     metrics.forEach((metric) => {
-      // @ts-expect-error ts-migrate(7053) FIXME: Element implicitly has an 'any' type because expre... Remove this comment to see the full error message
-      result[metric] = sum[metric] / divisor;
+      result[metric as keyof MetricsAverage] = sum[metric as keyof MetricsAverage] / divisor;
     });
 
     return result;
   }
 
-  getSummary() {
+  getSummary(): ProjectSummary {
     const { analyses } = this;
     const totalSloc = this.calculateTotalSloc(analyses);
     const averages = this.calculateAverages(analyses);
 
     return {
       totalSloc: totalSloc,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'sloc' does not exist on type '{}'.
       avgSloc: averages.sloc,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'maintainability' does not exist on type ... Remove this comment to see the full error message
       avgMaintainability: averages.maintainability,
-      // @ts-expect-error ts-migrate(2339) FIXME: Property 'cyclomatic' does not exist on type '{}'.
       avgCyclomatic: averages.cyclomatic,
       fileAnalyses: analyses,
     };

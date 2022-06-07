@@ -1,5 +1,4 @@
-const STYLE =
-`* {
+const STYLE = `* {
     font-family: Verdana;
 }
 body {

@@ -5,13 +5,15 @@ import { sum } from "lodash";
 import ESComplex from "typhonjs-escomplex";
 
 export function analyse(js: any) {
-    return ESComplex.analyzeModule(js);
+  return ESComplex.analyzeModule(js);
 }
 
 export function process(analyses: any) {
-    const summary = ESComplex.processProject(analyses);
+  const summary = ESComplex.processProject(analyses);
 
-    summary.totalLOC = sum(summary.reports.map((report: any) => report.aggregate.sloc.logical));
+  summary.totalLOC = sum(
+    summary.reports.map((report: any) => report.aggregate.sloc.logical)
+  );
 
-    return summary;
+  return summary;
 }

@@ -3,10 +3,10 @@
 import Controller from "./controller";
 
 function activate(context: any) {
-    const controller = new Controller(context);
+  const controller = new Controller(context);
 
-    context.subscriptions.push(controller);
-    controller.activate();
+  context.subscriptions.push(controller);
+  controller.activate();
 }
 
 const _activate = activate;
