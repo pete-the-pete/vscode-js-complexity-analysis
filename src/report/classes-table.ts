@@ -1,9 +1,7 @@
 "use strict";
 
 import Table from "./table";
-// @ts-expect-error ts-migrate(2614) FIXME: Module '"./metric-formatter.js"' has no exported m... Remove this comment to see the full error message
 import { formatMetric } from "./metric-formatter.js";
-// @ts-expect-error ts-migrate(2614) FIXME: Module '"./link.js"' has no exported member 'fileL... Remove this comment to see the full error message
 import { fileLineLink as link } from "./link.js";
 
 const columns = [

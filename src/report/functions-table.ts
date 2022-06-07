@@ -1,8 +1,8 @@
 "use strict";
 
 import Table from "./table";
-import metricFormatter from "./metric-formatter";
-import link from "./link.js";
+import { formatMetric } from "./metric-formatter";
+import { fileLineLink } from "./link.js";
 
 const columns = [
     { title: "Function",   align: "left"  },
@@ -21,7 +21,7 @@ function formatName(filePath: any, name: any, line: any) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
-    return link.fileLineLink(encodedName, filePath, line);
+    return fileLineLink(encodedName, filePath, line);
 }
 
 function FunctionsTable(filePath: any, functions: any) {
@@ -29,11 +29,9 @@ function FunctionsTable(filePath: any, functions: any) {
         formatName(filePath, f.name, f.line),
         f.sloc,
         f.params,
-        metricFormatter.formatMetric(f.cyclomatic, 6, 10),
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
-        metricFormatter.formatMetric(f.difficulty),
-        // @ts-expect-error ts-migrate(2554) FIXME: Expected 3 arguments, but got 1.
-        metricFormatter.formatMetric(f.bugs)
+        formatMetric(f.cyclomatic, 6, 10),
+        formatMetric(f.difficulty),
+        formatMetric(f.bugs)
     ]);
 
     const functionsTable = new Table({
