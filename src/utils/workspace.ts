@@ -9,7 +9,7 @@ import { workspace } from "vscode";
  *
  * @returns {Uri}
  */
-function getWorkspaceFiles() {
+export function getWorkspaceFiles() {
     return config.getIncludeExclude()
         .then(({
         include,
@@ -36,7 +36,3 @@ function _createGlob(patterns: any) {
       return `{${ patterns.join(",") }}`;
   }
 };
-
-export default {
-    getWorkspaceFiles
-}
