@@ -1,7 +1,7 @@
 "use strict";
 
 import { workspace, window } from "vscode";
-import { analyse } from "../complexity-analyzer";
+import { analyse } from "@js-complexity/analyzer";
 import FileAnalysis from "../models/file-analysis.js";
 import FileReport from "../report/file-report.js";
 

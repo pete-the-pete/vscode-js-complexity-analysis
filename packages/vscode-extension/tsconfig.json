@@ -1,0 +1,11 @@
+{
+  "extends": "../../tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "esModuleInterop": true,
+    "outDir": "dist",
+    "rootDir": "src"
+
+  },
+  "include": ["src/**/*.ts", "types.ts"],
+}
