@@ -15,5 +15,9 @@
     "node_modules",
     ".vscode-test"
   ],
-  "include": ["src/**/*.ts"],
+  "files": [],
+  "references": [
+    { "path": "./packages/analyzer"},
+    { "path": "./packages/vscode-extension"},
+  ]
 }

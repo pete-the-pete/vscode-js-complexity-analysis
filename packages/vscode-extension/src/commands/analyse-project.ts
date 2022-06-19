@@ -2,7 +2,7 @@
 
 import { readFile } from "fs/promises";
 import { window } from "vscode";
-import { analyse } from "../complexity-analyzer";
+import { analyse } from "@js-complexity/analyzer";
 import { getWorkspaceFiles } from "../utils/workspace";
 
 import FileAnalysis from "../models/file-analysis.js";

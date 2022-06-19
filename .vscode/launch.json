@@ -8,8 +8,8 @@
       "name": "Launch Extension",
       "runtimeExecutable": "${execPath}",
       "sourceMaps": true,
-      "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
-      "outFiles": ["${workspaceRoot}/out/**/*.js"],
+      "args": ["--extensionDevelopmentPath=${workspaceRoot}/packages/vscode-extension"],
+      "outFiles": ["${workspaceRoot}/packages/vscode-extension/dist/**/*.js"],
       "preLaunchTask": "npm: watch",
     },
     {
@@ -18,11 +18,11 @@
       "request": "launch",
       "runtimeExecutable": "${execPath}",
       "args": [
-        "--extensionDevelopmentPath=${workspaceFolder}",
-        "--extensionTestsPath=${workspaceFolder}/out/test/suite/index",
-        "${workspaceFolder}/src/controller.ts"
+        "--extensionDevelopmentPath=${workspaceRoot}",
+        "--extensionTestsPath=${workspaceRoot}/packages/vscode-extension/dist/test/suite/index",
+        "${workspaceRoot}/packages/vscode-extension/src/controller.ts"
       ],
-      "outFiles": ["${workspaceFolder}/out/test/**/*.js"],
+      "outFiles": ["${workspaceRoot}/packages/vscode-extension/dist/test/**/*.js"],
       "preLaunchTask": "npm: compile"
     }
   ]
