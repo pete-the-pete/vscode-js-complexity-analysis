@@ -9,24 +9,21 @@ import { workspace } from "vscode";
  *
  * @returns {Uri}
  */
-export function getWorkspaceFiles() {
+function getWorkspaceFiles() {
     return config.getIncludeExclude()
-        .then(({
-        include,
-        exclude
-    }: any) => {
+        .then(({ include, exclude }) => {
             const includePattern = _createGlob(include);
             const excludePattern = _createGlob(exclude);
 
             return workspace.findFiles(includePattern, excludePattern);
         })
-        .then((files: any) => files.map((fileUri: any) => ({
-        fsPath: fileUri.fsPath,
-        relativePath: workspace.asRelativePath(fileUri)
-    })));
+        .then(files => files.map(fileUri => ({
+            fsPath: fileUri.fsPath,
+            relativePath: workspace.asRelativePath(fileUri)
+        })));
 }
 
-function _createGlob(patterns: any) {
+function _createGlob(patterns) {
   switch (patterns.length) {
     case 0:
       return "";
@@ -36,3 +33,7 @@ function _createGlob(patterns: any) {
       return `{${ patterns.join(",") }}`;
   }
 };
+
+export default {
+    getWorkspaceFiles
+}

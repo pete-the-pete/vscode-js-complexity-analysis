@@ -1,6 +1,6 @@
 "use strict";
 
-import { readFile } from "fs/promises";
+import { readFileAsync } from "fs";
 import { join } from "path";
 import { workspace as _workspace } from "vscode";
 import { isEmpty } from "lodash";
@@ -27,7 +27,7 @@ function getIncludeExclude() {
     }
 
     return _getJsConfigConfig(workspace.rootPath)
-        .then((jsconfig: any) => {
+        .then(jsconfig => {
             if (jsconfig) {
                 return jsconfig;
             }
@@ -39,7 +39,7 @@ function getIncludeExclude() {
         });
 }
 
-function _getWorkspaceConfig(extensionConfig: any) {
+function _getWorkspaceConfig(extensionConfig) {
     const hasConfig = extensionConfig.has("include") || extensionConfig.has("exclude");
 
     if (!hasConfig) {
@@ -63,11 +63,11 @@ function _getWorkspaceConfig(extensionConfig: any) {
     };
 }
 
-function _getJsConfigConfig(rootPath: any) {
+function _getJsConfigConfig(rootPath) {
     const jsconfigFilename = join(rootPath, "jsconfig.json");
 
-    return readFile(jsconfigFilename, "utf8")
-        .then((fileContents: any) => {
+    return readFileAsync(jsconfigFilename, "utf8")
+        .then(fileContents => {
             const jsconfig = JSON.parse(fileContents);
             if (!jsconfig.include && !jsconfig.exclude) {
                 return null;

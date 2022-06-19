@@ -1,97 +1,73 @@
 {
-	"name": "js-complexity-analysis",
-	"displayName": "JS Complexity Analysis",
-	"description": "Produce a complexity analysis report of your JS project",
-	"version": "2.0.0",
-	"publisher": "TomiTurtiainen",
-	"engines": {
-		"vscode": "^1.52.0"
-	},
-	"lint-staged": {
-		"*.ts": "eslint --fix"
-	},
-	"scripts": {
-		"compile": "tsc -b",
-		"watch": "tsc -b -w",
-		"lint": "eslint --ext .js ./src",
-		"pretest": "npm run compile",
-		"test": "node ./out/test/runTest.js --timeout 10000"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:complexityAnalysis.analyseFile",
-		"onCommand:complexityAnalysis.analyseProject",
-		"onLanguage:javascript"
-	],
-	"main": "./out/extension",
-	"contributes": {
-		"commands": [
-			{
-				"command": "complexityAnalysis.analyseFile",
-				"title": "File complexity analysis"
-			},
-			{
-				"command": "complexityAnalysis.analyseProject",
-				"title": "Project complexity analysis"
-			}
-		],
-		"configuration": {
-			"type": "object",
-			"title": "Complexity analysis configuration",
-			"properties": {
-				"complexityAnalysis.include": {
-					"type": "array",
-					"default": [],
-					"description": "An array of files/folders that should be included by the parser. Glob patterns are accepted (eg. src/**/*.js)"
-				},
-				"complexityAnalysis.exclude": {
-					"type": "array",
-					"default": [],
-					"description": "An array of files/folders that should be ignored by the parser. Glob patterns are accepted (eg. test/**/*.js)"
-				}
-			}
-		}
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/tomi/vscode-js-complexity-analysis.git"
-	},
-	"license": "SEE LICENSE IN LICENSE.md",
-	"bugs": {
-		"url": "https://github.com/tomi/vscode-js-complexity-analysis/issues"
-	},
-	"homepage": "https://github.com/tomi/vscode-js-complexity-analysis",
-	"icon": "images/logo.png",
-	"galleryBanner": {
-		"color": "#ffffff",
-		"theme": "light"
-	},
-	"devDependencies": {
-		"@types/dot": "^1.1.5",
-		"@types/glob": "^7.2.0",
-		"@types/lodash": "^4.14.182",
-		"@types/mocha": "^9.1.1",
-		"@types/node": "^17.0.39",
-		"@types/vscode": "^1.52.0",
-		"@vscode/test-electron": "^2.1.4",
-		"eslint": "^8.16.0",
-		"glob": "^8.0.3",
-		"mocha": "^10.0.0",
-		"ts-migrate": "^0.1.28",
-		"typescript": "^4.7.3"
-	},
-	"dependencies": {
-		"dot": "1.1.3",
-		"es6-promisify": "7.0.0",
-		"lodash": "^4.17.21",
-		"typhonjs-escomplex": "0.1.0"
-	},
-	"__metadata": {
-		"id": "3bafbaa9-02d6-454c-ad91-5b7382597cb9",
-		"publisherDisplayName": "Tomi Turtiainen",
-		"publisherId": "666d1c8a-62f9-4fc9-8abf-cbecba96fc74",
-		"isPreReleaseVersion": false
-	}
+  "name": "js-complexity-analysis",
+  "displayName": "JS Complexity Analysis",
+  "description": "Produce a complexity analysis report of your JS project",
+  "version": "2.0.0",
+  "publisher": "TomiTurtiainen",
+  "engines": {
+    "vscode": "^1.5.1"
+  },
+  "scripts": {
+    "lint": "eslint --ext .js ./src"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:complexityAnalysis.analyseFile",
+    "onCommand:complexityAnalysis.analyseProject",
+    "onLanguage:javascript"
+  ],
+  "main": "./out/extension",
+  "contributes": {
+    "commands": [
+      {
+        "command": "complexityAnalysis.analyseFile",
+        "title": "File complexity analysis"
+      },
+      {
+        "command": "complexityAnalysis.analyseProject",
+        "title": "Project complexity analysis"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Complexity analysis configuration",
+      "properties": {
+        "complexityAnalysis.include": {
+          "type": "array",
+          "default": [],
+          "description": "An array of files/folders that should be included by the parser. Glob patterns are accepted (eg. src/**/*.js)"
+        },
+        "complexityAnalysis.exclude": {
+          "type": "array",
+          "default": [],
+          "description": "An array of files/folders that should be ignored by the parser. Glob patterns are accepted (eg. test/**/*.js)"
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomi/vscode-js-complexity-analysis.git"
+  },
+  "license": "SEE LICENSE IN LICENSE.md",
+  "bugs": {
+    "url": "https://github.com/tomi/vscode-js-complexity-analysis/issues"
+  },
+  "homepage": "https://github.com/tomi/vscode-js-complexity-analysis",
+  "icon": "images/logo.png",
+  "galleryBanner": {
+    "color": "#ffffff",
+    "theme": "light"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0"
+  },
+  "dependencies": {
+    "dot": "1.1.3",
+    "es6-promisify": "7.0.0",
+    "lodash": "^4.17.21",
+    "typhonjs-escomplex": "0.1.0"
+  }
 }
