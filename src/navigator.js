@@ -4,8 +4,7 @@ import * as vscode from 'vscode';
 import { window, ViewColumn, Uri } from "vscode";
 
 class Navigator {
-  navigate: any;
-  constructor(options: any, reportProvider: any) {
+  constructor(options, reportProvider) {
     function getTargetColumn() {
       const numOpenEditors = window.visibleTextEditors.length;
 
@@ -23,7 +22,7 @@ class Navigator {
       }
     }
 
-    function navigate(path: any) {
+    function navigate(path) {
       const panel = vscode.window.createWebviewPanel(
         "complexity-analysis", // Identifies the type of the webview. Used internally
         "Complexity Analysis Coding", // Title of the panel displayed to the user

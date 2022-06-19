@@ -7,8 +7,8 @@ const template = _template(`
 <div class="metric-row">{{= it.metrics }}</div>
 `);
 
-function MetricRow(metrics: any) {
-    const renderedMetrics = metrics.map((m: any) => metricBox(m)).join("");
+function MetricRow(metrics) {
+    const renderedMetrics = metrics.map(m => metricBox(m)).join("");
 
     return template({
         metrics: renderedMetrics

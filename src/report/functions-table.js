@@ -1,8 +1,8 @@
 "use strict";
 
 import Table from "./table";
-import { formatMetric } from "./metric-formatter";
-import { fileLineLink } from "./link.js";
+import metricFormatter from "./metric-formatter";
+import link from "./link.js";
 
 const columns = [
     { title: "Function",   align: "left"  },
@@ -13,7 +13,7 @@ const columns = [
     { title: "Est # bugs", align: "right" }
 ];
 
-function formatName(filePath: any, name: any, line: any) {
+function formatName(filePath, name, line) {
     const encodedName = name
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -21,17 +21,17 @@ function formatName(filePath: any, name: any, line: any) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 
-    return fileLineLink(encodedName, filePath, line);
+    return link.fileLineLink(encodedName, filePath, line);
 }
 
-function FunctionsTable(filePath: any, functions: any) {
-    const rows = functions.map((f: any) => [
+function FunctionsTable(filePath, functions) {
+    const rows = functions.map(f => [
         formatName(filePath, f.name, f.line),
         f.sloc,
         f.params,
-        formatMetric(f.cyclomatic, 6, 10),
-        formatMetric(f.difficulty),
-        formatMetric(f.bugs)
+        metricFormatter.formatMetric(f.cyclomatic, 6, 10),
+        metricFormatter.formatMetric(f.difficulty),
+        metricFormatter.formatMetric(f.bugs)
     ]);
 
     const functionsTable = new Table({

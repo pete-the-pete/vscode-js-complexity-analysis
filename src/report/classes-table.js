@@ -13,7 +13,7 @@ const columns = [
     { title: "Est # bugs", align: "right" }
 ];
 
-function formatName(filePath: any, name: any, line: any) {
+function formatName(filePath, name, line) {
     const encodedName = name
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -24,11 +24,11 @@ function formatName(filePath: any, name: any, line: any) {
     return link(encodedName, filePath, line);
 }
 
-function ClassesTable(analysis: any) {
+function ClassesTable(analysis) {
     const filePath = analysis.path;
 
-    const classes = analysis.classes.map((c: any) => {
-        const rows = c.methods.map((f: any) => [
+    const classes = analysis.classes.map(c => {
+        const rows = c.methods.map(f => [
             formatName(filePath, f.name, f.line),
             f.sloc,
             f.params,
