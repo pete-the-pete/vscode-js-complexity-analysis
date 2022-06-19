@@ -12,7 +12,7 @@ const template = _template(`
 </div>
 `);
 
-function getTitle(metric) {
+function getTitle(metric: any) {
     const url         = metric.infoUrl;
     const title       = metric.title;
     const description = metric.description || "";
@@ -22,7 +22,7 @@ function getTitle(metric) {
         `<span title="${ description }">${ title }</span>`;
 }
 
-function isInRange(range, value) {
+function isInRange(range: any, value: any) {
     if (Array.isArray(range)) {
         return range[0] <= value && value < range[1];
     } else {
@@ -30,7 +30,7 @@ function isInRange(range, value) {
     }
 }
 
-function getIcon(metric, value) {
+function getIcon(metric: any, value: any) {
     if (isInRange(metric.errorRange, value)) {
         return error;
     } else if (isInRange(metric.warningRange, value)) {
@@ -50,7 +50,7 @@ function getIcon(metric, value) {
  *   - warningRange (optional)
  * - value: Value of the metric
  */
-function MetricBox(options) {
+function MetricBox(options: any) {
     const metric = options.metric;
     const value  = options.value;
 

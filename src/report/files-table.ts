@@ -2,7 +2,7 @@
 
 import Table from "./table";
 import { formatMetric } from "./metric-formatter";
-import { localLink as link } from "./link";
+import { localLink } from "./link";
 
 const columns = [
     { title: "Name",               align: "left"  },
@@ -12,12 +12,12 @@ const columns = [
     { title: "Est errors",         align: "right" }
 ];
 
-function formatFile(filePath) {
-    return link(filePath, filePath);
+function formatFile(filePath: any) {
+    return localLink(filePath, filePath);
 }
 
-function FilesTable(analysis) {
-    const rows = analysis.fileAnalyses.map(f => [
+function FilesTable(analysis: any) {
+    const rows = analysis.fileAnalyses.map((f: any) => [
         formatFile(f.path),
         f.sloc,
         formatMetric(f.cyclomatic.avg, 6, 10),
