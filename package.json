@@ -15,7 +15,8 @@
     "compile": "tsc -b -f",
     "watch": "tsc -b -w",
     "clean:build": "rimraf **/dist",
-    "clean:node_modules": "rimraf **/node_modules"
+    "clean:node_modules": "rimraf **/node_modules",
+    "test": "yarn workspace @js-complexity/analyzer test && yarn workspace @js-complexity/vscode-extension test"
   },
   "repository": {
     "type": "git",
