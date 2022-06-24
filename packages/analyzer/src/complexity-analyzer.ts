@@ -5,7 +5,7 @@ import { sum } from "lodash";
 // @ts-ignore
 import ESComplex from "typhonjs-escomplex";
 
-export function analyse(js: any) {
+export function analyse(js: string) {
     return ESComplex.analyzeModule(js);
 }
 

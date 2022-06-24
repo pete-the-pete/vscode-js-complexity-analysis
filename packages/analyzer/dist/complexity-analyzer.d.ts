@@ -1,2 +1,2 @@
-export declare function analyse(js: any): any;
+export declare function analyse(js: string): any;
 export declare function process(analyses: any): any;
