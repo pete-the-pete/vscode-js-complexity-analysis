@@ -1,4 +1,5 @@
-import * as path from 'path';
+import os from 'os';
+import path from 'path';
 
 import { runTests } from '@vscode/test-electron';
 
@@ -12,8 +13,13 @@ async function main() {
     // Passed to --extensionTestsPath
     const extensionTestsPath = path.resolve(__dirname, './suite/index');
 
-    debugger;
-    const launchArgs = [extensionDevelopmentPath, 'src/controller.ts', '--disable-extensions'];
+    const launchArgs = [
+      extensionDevelopmentPath,
+      'src/controller.ts',
+      '--disable-extensions',
+      '--user-data-dir',
+      `${os.tmpdir()}`
+    ];
 
     // Download VS Code, unzip it and run the integration test
     await runTests({ extensionDevelopmentPath, extensionTestsPath, launchArgs });
