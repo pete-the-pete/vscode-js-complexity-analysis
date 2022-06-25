@@ -30,4 +30,8 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
     - name: Run Tests
-      run: yarn test
+    - run: yarn workspace @js-complexity/analyzer test
+    - run: xvfb-run -a yarn workspace @js-complexity/vscode-extension test
+      if: runner.os == 'Linux'
+    - run: yarn test
+      if: runner.os != 'Linux'
