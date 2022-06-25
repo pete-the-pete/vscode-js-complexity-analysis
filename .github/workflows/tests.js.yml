@@ -29,9 +29,11 @@ jobs:
           ${{ runner.os }}-build-node-modules
           ${{ runner.os }}-build-
           ${{ runner.os }}-
-    - name: Run Tests
-    - run: yarn workspace @js-complexity/analyzer test
-    - run: xvfb-run -a yarn workspace @js-complexity/vscode-extension test
+    - name: Run Analyser Tests
+      run: yarn workspace @js-complexity/analyzer test
+    - name: Run VSCode Tests
+      run: xvfb-run -a yarn workspace @js-complexity/vscode-extension test
       if: runner.os == 'Linux'
-    - run: yarn test
+    - name: Run all tests
+      run: yarn test
       if: runner.os != 'Linux'
