@@ -18,6 +18,7 @@
   "files": [],
   "references": [
     { "path": "./packages/analyzer"},
+    { "path": "./packages/ui"},
     { "path": "./packages/vscode-extension"},
   ]
 }

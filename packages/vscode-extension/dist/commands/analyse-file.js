@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const vscode_1 = require("vscode");
 const analyzer_1 = require("@js-complexity/analyzer");
 const file_analysis_js_1 = __importDefault(require("../models/file-analysis.js"));
-const file_report_js_1 = __importDefault(require("../report/file-report.js"));
+const ui_1 = require("@js-complexity/ui");
 class AnalyseFile {
     reportFactory;
     navigator;
@@ -19,7 +19,7 @@ class AnalyseFile {
         const fileContents = document.getText();
         const rawAnalysis = (0, analyzer_1.analyse)(fileContents);
         const analysis = new file_analysis_js_1.default(filePath, rawAnalysis);
-        const report = new file_report_js_1.default(analysis, false);
+        const report = new ui_1.FileReport(analysis, false);
         this.reportFactory.addReport(filePath, report);
         this.navigator.navigate(`/${filePath}`);
     }

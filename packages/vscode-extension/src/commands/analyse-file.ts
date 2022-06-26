@@ -3,7 +3,7 @@
 import { workspace, window } from "vscode";
 import { analyse } from "@js-complexity/analyzer";
 import FileAnalysis from "../models/file-analysis.js";
-import FileReport from "../report/file-report.js";
+import { FileReport } from "@js-complexity/ui";
 
 export default class AnalyseFile {
     reportFactory: any;

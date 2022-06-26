@@ -14,7 +14,6 @@ async function main() {
         // The path to the extension test runner script
         // Passed to --extensionTestsPath
         const extensionTestsPath = path_1.default.resolve(__dirname, './suite/index');
-        debugger;
         const launchArgs = [
             extensionDevelopmentPath,
             'src/controller.ts',
