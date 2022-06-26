@@ -7,8 +7,7 @@ import { getWorkspaceFiles } from "../utils/workspace";
 
 import FileAnalysis from "../models/file-analysis.js";
 import ProjectAnalysis from "../models/project-analysis.js";
-import FileReport from "../report/file-report.js";
-import ProjectReport from "../report/project-report.js";
+import { FileReport, ProjectReport } from "@js-complexity/ui";
 
 export default class AnalyseProject {
   reportFactory: any;

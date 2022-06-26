@@ -9,8 +9,7 @@ const analyzer_1 = require("@js-complexity/analyzer");
 const workspace_1 = require("../utils/workspace");
 const file_analysis_js_1 = __importDefault(require("../models/file-analysis.js"));
 const project_analysis_js_1 = __importDefault(require("../models/project-analysis.js"));
-const file_report_js_1 = __importDefault(require("../report/file-report.js"));
-const project_report_js_1 = __importDefault(require("../report/project-report.js"));
+const ui_1 = require("@js-complexity/ui");
 class AnalyseProject {
     reportFactory;
     navigator;
@@ -39,7 +38,7 @@ class AnalyseProject {
             try {
                 const rawAnalysis = (0, analyzer_1.analyse)(fileContents);
                 const analysis = new file_analysis_js_1.default(relativePath, rawAnalysis);
-                const report = new file_report_js_1.default(analysis);
+                const report = new ui_1.FileReport(analysis);
                 this.reportFactory.addReport(relativePath, report);
                 return analysis;
             }
@@ -62,7 +61,7 @@ class AnalyseProject {
             }
         });
         const aggregate = projectAnalysis.getSummary();
-        const report = new project_report_js_1.default(aggregate, errors);
+        const report = new ui_1.ProjectReport(aggregate, errors);
         this.reportFactory.addReport("/", report);
         this.navigator.navigate("/");
     }
